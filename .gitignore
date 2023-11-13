@@ -1,0 +1,8 @@
+# .gitignore
+
+# Ignore .env files
+.env
+
+# Ignore the 'ollama' directory
+ollama/
+
