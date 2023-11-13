@@ -1,0 +1,28 @@
+version: '3'
+
+services:
+  nginx:
+    image: nginx
+    container_name: nginx-ollama
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx-config.sh:/nginx-config.sh
+    env_file:
+      - .env
+    entrypoint: /bin/bash /nginx-config.sh
+    depends_on:
+      - ollama
+
+  ollama:
+    image: ollama/ollama:latest
+    container_name: ollama
+    ports:
+      - "11434:11434"
+    volumes:
+      - ./ollama:/root/.ollama
+
+networks:
+  default:
+    name: nginx-proxy
+    external: true
